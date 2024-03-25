@@ -6,17 +6,6 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.event.*;
 
-class ScreenManager{
-	private GraphicsDevice vc;
-	public ScreenManager() {
-		GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		vc = e.getDefaultScreenDevice();
-	}
-	
-	public DisplayMode[] getCompatibleDisplayModes() {
-		return vc.getDisplayModes();
-	}
-}
 
 class kanvas02 extends Canvas implements KeyListener
 {
@@ -34,7 +23,39 @@ class kanvas02 extends Canvas implements KeyListener
 		addKeyListener(this);   
 	}
 	
-	public void paint(Graphics p)
+	Thread gameThread;
+	public void startGameThread() {
+		gameThread = new Thread();
+		gameThread.start();
+	}
+	
+	
+	public void run() {
+		double drawInterval = 1000000000/FPS;
+		double nextDrawTime = System.nanoTime()+drawInterval;
+		while(gameThread!=null) {
+			long currentTime = System.nanoTime();
+			update();
+			repaint();
+			try {
+				double remainingTime = nextDrawTime - System.nanoTime();
+				remainingTime /= 1000000;
+				if(remainingTime < 0) {
+					remainingTime = 0;
+				}
+				Thread.sleep((long)remainingTime);
+				nextDrawTime += drawInterval;
+				
+			}
+			catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
+	public void paintComponent(Graphics p)
 	{  
 		
 		if(x>=1000) {
@@ -55,14 +76,14 @@ class kanvas02 extends Canvas implements KeyListener
 			success = true;
 		}
 		else if(success) {
-//			p.setFont(f1);
-//			p.drawString("YOU WON!", 400, 300);
+			p.setFont(f1);
+			p.drawString("YOU WON!", 400, 300);
 			p.dispose();
 		}
 		else {
 			p.setColor(Color.black);
-//			p.setFont(f2);
-//			p.drawString("LEVEL 1", 400, 25);
+		p.setFont(f2);
+		p.drawString("LEVEL 1", 400, 25);
 			p.fillRect(x, y, 100, 60);  
 			p.setColor(Color.black);
 			p.fillRect(0,650, 1000, 60);
