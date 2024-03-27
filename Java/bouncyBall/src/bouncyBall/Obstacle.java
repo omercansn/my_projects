@@ -67,7 +67,7 @@ public class Obstacle {
     public static ArrayList<Obstacle> createObstacles() {
         ArrayList<Obstacle> obstacles = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            int x = (int) (900*Math.random());
+            int x = (int) (300+500*Math.random());
             int y = (int) (550-150*i);
             int thickness = 20;
             int len = 100+(int)(200*Math.random());

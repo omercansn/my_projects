@@ -57,7 +57,7 @@ public class Player{
         this.ballY = ballYInitial;
     }
 
-    public void update() {   
+    public void updateBall() {   
         if (kh.leftPressed && ballX > 0) {
             ballX -= 5;
         }
@@ -88,7 +88,7 @@ public class Player{
                     {
                     t = 0;
                 }
-                if(ballX + ballSize > gp.endPlatformX && 
+                if(ballX > gp.endPlatformX && 
                     ballX < gp.endPlatformX + gp.endPlatformLength && 
                     ballY > gp.endPlatformY-ballSize && 
                     ballY < 100+ballSize+gp.endPlatformThickness){

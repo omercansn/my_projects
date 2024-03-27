@@ -1,10 +1,11 @@
 package bouncyBall;
 
 import java.awt.Frame;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-public class Main implements WindowListener {
+public class Main implements WindowListener  {
 
     Frame frame;
     GamePanel panel;
@@ -15,7 +16,7 @@ public class Main implements WindowListener {
 
     public Main(){ 
 
-        frame = new Frame("Bouncy Ball v0.53");
+        frame = new Frame("Bouncy Ball v0.85");
         panel = new GamePanel();
 
         frame.addWindowListener(this);
@@ -38,6 +39,7 @@ public class Main implements WindowListener {
         System.exit(0);
     }
     public void windowClosed(WindowEvent e) {
+        
     }
     public void windowIconified(WindowEvent e) {
     }
