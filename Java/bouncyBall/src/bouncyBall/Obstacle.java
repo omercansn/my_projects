@@ -58,10 +58,19 @@ public class Obstacle {
 
     public void updateObstacle(){ 
         obstacleX+=obstacleSpeed;
-        if(obstacleX>=1024){
-            obstacleX = 1024;
-            obstacleX = -obstacleLen;
+        if(obstacleSpeed<0){
+            if(obstacleX<=-obstacleLen){
+                obstacleX = -obstacleLen;
+                obstacleX = 1024;
+            }
         }
+        else{
+            if(obstacleX>=1024){
+                obstacleX = 1024;
+                obstacleX = -obstacleLen;
+            }
+        }
+        
     }
 
     public static ArrayList<Obstacle> createObstacles() {
@@ -71,7 +80,14 @@ public class Obstacle {
             int y = (int) (550-150*i);
             int thickness = 20;
             int len = 100+(int)(200*Math.random());
-            int speed = 1+(int)(4*Math.random());
+            int speed = -4+(int)(8*Math.random());
+            if(speed==0){
+                do{
+                    speed = -4+(int)(8*Math.random());
+                } while (speed==0);
+            }
+            
+            
             Obstacle obstacle = new Obstacle(x, y, thickness, len, speed);
             obstacles.add(obstacle);
         }

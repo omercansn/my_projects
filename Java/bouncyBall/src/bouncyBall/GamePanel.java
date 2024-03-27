@@ -113,19 +113,8 @@ public class GamePanel extends Canvas implements Runnable{
             g.dispose();
             kh.gameFinished = true;
         }
-        else if(countdown-elapsedTimeSeconds > 0 && countdown-elapsedTimeSeconds <= 10){
-            if(countdown-elapsedTimeSeconds > 5){
-                setBackground(new Color(224,224,0));
-            }
-            else{
-                setBackground(new Color(255,128,0));
-            }
-            
-            main.stop();
-            tenSec.start();
-        }
-
-        if(endGateDrawn && 
+        
+        else if(endGateDrawn && 
         ball.getX() >= endGateX && 
         ball.getX() <= endGateX + endGateWidth && 
         ball.getY() >= endGateY - ball.getBallSize() && 
@@ -143,6 +132,16 @@ public class GamePanel extends Canvas implements Runnable{
             kh.gameFinished = true;
         }
         else {
+            if(countdown-elapsedTimeSeconds > 0 && countdown-elapsedTimeSeconds <= 10){
+                if(countdown-elapsedTimeSeconds > 5){
+                    setBackground(new Color(224,224,0));
+                }
+                else{
+                    setBackground(new Color(255,128,0));
+                }
+                main.stop();
+                tenSec.start();
+            }
             g.setColor(Color.black);
             g.fillRect(groundStartX, groundStartY, groundWidth, groundHeight);
             g.fillRect(endPlatformX, endPlatformY, endPlatformLength, endPlatformThickness);
